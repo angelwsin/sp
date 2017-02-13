@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:u="http://www.example.org/schema/user"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.example.org/schema/user http://www.example.org/schema/user/user.xsd
+	http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx   http://www.springframework.org/schema/tx/spring-tx.xsd"
+	default-autowire="byName">
+
+      <bean id="defApplicationListener" class="com.spring.event.listen.DefApplicationListener"/>
+      <u:user  id="zhangsan"   userName="xhang" email="4893940@qq.com" />
+      
+      <bean id="aopTest" class="com.spring.aop.AopTest"/>
+      <bean id="defAop" class="com.spring.aop.DefAop"/>
+      <bean id="userFactory" class="com.spring.factory.method.UserFactory"/>
+      <bean  id="user"  factory-bean="userFactory" factory-method="getUser"/>
+      <aop:aspectj-autoproxy/>
+      
+      <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+          <property name="username" value="root"/>
+          <property name="password" value="admin"/>
+          <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+          <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+      </bean>
+      <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+            <property name="dataSource" ref="dataSource"/>
+      </bean>
+      <tx:annotation-driven  transaction-manager="transactionManager"/>
+      
+      <bean id="userService" class="com.tx.UserServiceImpl"/>
+      
+      <bean id="vUser" class="com.vo.User" >
+           <property name="age" value="1"/>
+      </bean>
+      
+
+</beans>
