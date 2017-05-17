@@ -5,9 +5,12 @@ import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
@@ -89,9 +92,11 @@ public class DefDataSource  implements DataSource {
     }
     
     private Properties init(String username,String password){
+        Optional<String> user = Optional.ofNullable(this.username);
+        Optional<String> pass = Optional.ofNullable(this.password);
         Properties props = new Properties();
-        props.put("user",StringUtils.getValue(this.username, username));
-        props.put("password", StringUtils.getValue(this.password, password));
+        props.put("user",user.orElse(username));
+        props.put("password", pass.orElse(password));
         return props;
     }
     
@@ -119,6 +124,10 @@ public class DefDataSource  implements DataSource {
     
     public static void main(String[] args) {
         
+    }
+
+    public Logger getParentLogger() throws SQLFeatureNotSupportedException {
+        return null;
     }
     
 

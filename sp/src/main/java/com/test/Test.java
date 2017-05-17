@@ -80,10 +80,12 @@ public class Test {
 				System.out.println(node.getNodeName());
 				if (node instanceof Element) {
 					Element ele = (Element) node;
+					Node x = ele;
+					System.out.println(x.getNamespaceURI());
 					NamedNodeMap attributes = ele.getAttributes();
 					for (int j = 0; j < attributes.getLength(); j++) {
 						Node nodej = attributes.item(j);
-						System.out.println(nodej.getNodeName()+"-----"+nodej.getNamespaceURI());
+						System.out.println(nodej.getNodeName()+"-----"+ele.getNamespaceURI());
 					}
 				}
 			}
@@ -95,7 +97,7 @@ public class Test {
 			ap.say();
 			//context.getBean("user");
 		
-			DataSource dataSource = (DataSource) context.getBean("dataSource");
+			/*DataSource dataSource = (DataSource) context.getBean("dataSource");
 			JdbcTemplate jdbc = new JdbcTemplate();
 			jdbc.setDataSource(dataSource);
 			
@@ -112,7 +114,7 @@ public class Test {
                    // throw new SQLException("操作错误");
                    return null;
                 }
-            });
+            });*/
 			
 		  UserService userService = 	(UserService) context.getBean("userService");
 		  userService.getUser();

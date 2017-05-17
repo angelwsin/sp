@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="com.db.mapper.MenuMapper">  
+
+    
+    <insert id="insertMenu" parameterType="com.db.bean.Menu" useGeneratedKeys="true" keyColumn="id">  
+       insert into
+       menu(
+                type,  
+                name,  
+                url,  
+                pId  
+              ) 
+       values(
+                #{type},  
+                #{name},   
+                #{url},  
+                #{pId}  
+              )
+    </insert>
+     
+    <update id="updateMenu" parameterType="com.db.bean.Menu">  
+       update menu set 
+                id=#{id},  
+                type=#{type},  
+                name=#{name},  
+                key=#{key},  
+                url=#{url},  
+                pId=#{pId}  
+           </update> 
+
+    <delete id="deleteMenu" parameterType="com.db.bean.Menu">  
+       delete from menu 
+    </delete>
+    
+    <select id="selectMenu" parameterType="com.db.bean.Menu" resultType="com.db.bean.Menu">  
+       select * from menu
+    </select>
+    
+    <select id="selectMenus" parameterType="com.db.bean.Menu" resultType="com.db.bean.Menu">  
+       select * from menu
+    </select>
+    
+</mapper>

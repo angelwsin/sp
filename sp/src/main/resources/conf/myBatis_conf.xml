@@ -30,6 +30,7 @@
     </environments>  
     <mappers>  
        <mapper resource="sqlMap/userSqlMap.xml"/>
+       <mapper resource="sqlMap/Menu-sqlMap.xml"/>
       <!--  <package name="com.tiantian.mybatis.mapperinterface"/>   -->
     </mappers> 
 </configuration>
